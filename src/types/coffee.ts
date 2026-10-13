@@ -1,13 +1,6 @@
 export type CoffeeVariety = 
-  | 'Conilon Vitória'
-  | 'Conilon Robusta Amazônico'
-  | 'Conilon Tradicional'
-  | 'Conilon Especial (80+ pts)'
-  | 'Arábica Catuaí'
-  | 'Arábica Mundo Novo'
-  | 'Arábica Bourbon'
-  | 'Café Despolpado'
-  | 'Café em Coco'
+  | 'Conilon'
+  | 'Robusta Amazônico'
   | 'Outro';
 
 export type CoffeeGroup = 'Conilon' | 'Arábica' | 'Outro';
