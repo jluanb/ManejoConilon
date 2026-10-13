@@ -1,0 +1,6 @@
+{
+  "name": "Conilon Stock Pro",
+  "description": "Sistema intuitivo para gerenciamento de estoque de café Conilon e Arábica com controle de lotes, sacas, movimentações, romaneios e sincronização em nuvem.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
