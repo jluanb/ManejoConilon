@@ -1,45 +1,30 @@
 import { CoffeeLot, StockMovement, Warehouse, CoffeePriceQuote, FarmProfile } from '../types/coffee';
 
 const STORAGE_KEYS = {
-  LOTS: 'conilon_stock_lots_v1',
-  MOVEMENTS: 'conilon_stock_movements_v1',
-  WAREHOUSES: 'conilon_stock_warehouses_v1',
-  QUOTES: 'conilon_stock_quotes_v1',
-  FARM_PROFILE: 'conilon_stock_farm_profile_v1',
+  LOTS: 'conilon_stock_lots_v2',
+  MOVEMENTS: 'conilon_stock_movements_v2',
+  WAREHOUSES: 'conilon_stock_warehouses_v2',
+  QUOTES: 'conilon_stock_quotes_v2',
+  FARM_PROFILE: 'conilon_stock_farm_profile_v2',
 };
 
+// Armazéns padrão limpos para organização inicial
 export const INITIAL_WAREHOUSES: Warehouse[] = [
   {
     id: 'w-1',
     name: 'Tulha Principal 01',
     code: 'T-01',
     type: 'Tulha de Madeira',
-    capacityBags: 1200,
-    notes: 'Tulha ventilada para café conilon seco em coco ou beneficiado',
+    capacityBags: 1000,
+    notes: 'Tulha para armazenamento de café seco',
   },
   {
     id: 'w-2',
-    name: 'Galpão A - Pilha Central',
+    name: 'Galpão A',
     code: 'GL-A',
     type: 'Galpão de Alvenaria',
-    capacityBags: 2500,
-    notes: 'Armazenamento em sacaria de juta sobre paletes de madeira',
-  },
-  {
-    id: 'w-3',
-    name: 'Tulha Secundária 02',
-    code: 'T-02',
-    type: 'Tulha de Madeira',
-    capacityBags: 800,
-    notes: 'Destinada a lotes de escolha e bica corrida',
-  },
-  {
-    id: 'w-4',
-    name: 'Silo Graneleiro 01',
-    code: 'SILO-1',
-    type: 'Silo Graneleiro',
-    capacityBags: 3000,
-    notes: 'Armazenamento a granel com aeração forçada',
+    capacityBags: 2000,
+    notes: 'Armazenamento em sacaria de juta',
   },
 ];
 
@@ -50,210 +35,62 @@ export const INITIAL_QUOTES: CoffeePriceQuote[] = [
     group: 'Conilon',
     description: 'Padrão Cooabriel / Norte do ES - até 20% de defeitos',
     price: 1380.00,
-    referenceLocation: 'São Gabriel da Palha / Colatina - ES',
-    changePercent: 1.85,
+    referenceLocation: 'Cooabriel / Norte ES',
+    changePercent: 0,
     updatedAt: new Date().toISOString(),
   },
   {
     id: 'q-2',
     name: 'Café Conilon Especial (80+ pts)',
     group: 'Conilon',
-    description: 'Robusta de qualidade superior, fermentado e rastreado',
+    description: 'Robusta de qualidade superior rastreado',
     price: 1650.00,
-    referenceLocation: 'Região Serrana & Norte Capixaba',
-    changePercent: 0.50,
+    referenceLocation: 'Espírito Santo',
+    changePercent: 0,
     updatedAt: new Date().toISOString(),
   },
   {
     id: 'q-3',
-    name: 'Café Conilon Tipo 7 (Bica Corrida)',
-    group: 'Conilon',
-    description: 'Bica corrida direto da tulha com impurezas usuais',
-    price: 1320.00,
-    referenceLocation: 'Espírito Santo / Rondônia',
-    changePercent: 1.20,
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: 'q-4',
     name: 'Café Arábica Tipo 6 (Duro)',
     group: 'Arábica',
-    description: 'Referência CEPEA / Sul de Minas & Montanhas ES',
+    description: 'Referência CEPEA / Bebida Dura',
     price: 1820.00,
-    referenceLocation: 'Venda Nova do Imigrante - ES / MG',
-    changePercent: -0.65,
+    referenceLocation: 'Bolsa / Cooperativas',
+    changePercent: 0,
     updatedAt: new Date().toISOString(),
   },
 ];
 
 export const INITIAL_FARM_PROFILE: FarmProfile = {
-  farmName: 'Sítio Santa Rita - Fazenda Café Ouro',
-  producerName: 'Luan Bissoli & Família',
-  document: '028.941.517-80 / IE: 082.910.44-1',
-  city: 'São Gabriel da Palha',
-  state: 'ES',
-  contact: '(27) 99876-5432',
+  farmName: '',
+  producerName: '',
+  document: '',
+  city: '',
+  state: '',
+  contact: '',
 };
 
-export const INITIAL_LOTS: CoffeeLot[] = [
-  {
-    id: 'lot-01',
-    code: 'LOT-CN-2026-01',
-    variety: 'Conilon Vitória',
-    group: 'Conilon',
-    processType: 'Beneficiado / Pilado',
-    harvestYear: '2025/2026',
-    bagsCount: 380,
-    weightKg: 22800,
-    warehouseId: 'w-1',
-    warehouseLocation: 'Tulha Principal 01 - Baia 1',
-    moisture: 11.8,
-    sieve: 'Peneira 13 acima (86%)',
-    defects: 'Tipo 7 (14% imperfeitos)',
-    cupProfile: 'Bebida Neutra / Padrão Comercial',
-    estimatedPricePerBag: 1380.00,
-    producer: 'Sítio Santa Rita',
-    farmLocation: 'Córrego da Laje, Talhão 04',
-    notes: 'Café de excelente granulação, secador estático com temperatura controlada a 38°C.',
-    status: 'Disponível',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 12).toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: 'lot-02',
-    code: 'LOT-CN-2026-02',
-    variety: 'Conilon Robusta Amazônico',
-    group: 'Conilon',
-    processType: 'Cereja Descascado',
-    harvestYear: '2025/2026',
-    bagsCount: 195,
-    weightKg: 11700,
-    warehouseId: 'w-2',
-    warehouseLocation: 'Galpão A - Pilha Central',
-    moisture: 11.2,
-    sieve: 'Peneira 16 acima (92%)',
-    defects: 'Tipo 6 (máx 9% defeitos)',
-    cupProfile: 'Especial 82 pontos (notas de cacau e melaço)',
-    estimatedPricePerBag: 1650.00,
-    producer: 'Sítio Santa Rita',
-    farmLocation: 'Talhão Novo dos Clones Incaper',
-    notes: 'Lote selecionado colheita madura com fermentação anaeróbica 48h.',
-    status: 'Disponível',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7).toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: 'lot-03',
-    code: 'LOT-CN-2026-03',
-    variety: 'Conilon Tradicional',
-    group: 'Conilon',
-    processType: 'Natural / Em Coco',
-    harvestYear: '2025/2026',
-    bagsCount: 520,
-    weightKg: 31200,
-    warehouseId: 'w-4',
-    warehouseLocation: 'Silo Graneleiro 01',
-    moisture: 12.3,
-    sieve: 'Bica Corrida',
-    defects: 'Tipo 7/8',
-    cupProfile: 'Bebida Limpa',
-    estimatedPricePerBag: 1320.00,
-    producer: 'Fazenda Boa Esperança (Parceria)',
-    farmLocation: 'Linhares - ES',
-    notes: 'Café em coco pronto para beneficiamento na máquina própria.',
-    status: 'Disponível',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-  {
-    id: 'lot-04',
-    code: 'LOT-AB-2026-01',
-    variety: 'Arábica Catuaí',
-    group: 'Arábica',
-    processType: 'Beneficiado / Pilado',
-    harvestYear: '2025/2026',
-    bagsCount: 110,
-    weightKg: 6600,
-    warehouseId: 'w-2',
-    warehouseLocation: 'Galpão A - Palete 04',
-    moisture: 11.5,
-    sieve: 'Peneira 16 acima',
-    defects: 'Tipo 6 Bebida Dura',
-    cupProfile: 'Acidez cítrica e corpo cremoso',
-    estimatedPricePerBag: 1820.00,
-    producer: 'Sítio Santa Rita - Talhão Alto',
-    farmLocation: 'Região de Altitude (720m)',
-    notes: 'Lote de arábica colhido a mão e despolpado no mesmo dia.',
-    status: 'Reservado',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 15).toISOString(),
-    updatedAt: new Date().toISOString(),
-  },
-];
-
-export const INITIAL_MOVEMENTS: StockMovement[] = [
-  {
-    id: 'mov-01',
-    lotId: 'lot-01',
-    lotCode: 'LOT-CN-2026-01',
-    variety: 'Conilon Vitória',
-    type: 'ENTRADA',
-    reason: 'Colheita Própria',
-    bagsCount: 380,
-    weightKg: 22800,
-    date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 12).toISOString().split('T')[0],
-    receiptNumber: 'ROM-2026-0042',
-    counterparty: 'Sítio Santa Rita (Colheita)',
-    driverName: 'Marcos Vinicius',
-    vehiclePlate: 'PPX-4A20',
-    warehouseDest: 'Tulha Principal 01',
-    moisture: 11.8,
-    notes: 'Entrada após secagem e pilagem no beneficiador.',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 12).toISOString(),
-  },
-  {
-    id: 'mov-02',
-    lotId: 'lot-02',
-    lotCode: 'LOT-CN-2026-02',
-    variety: 'Conilon Robusta Amazônico',
-    type: 'ENTRADA',
-    reason: 'Colheita Própria',
-    bagsCount: 250,
-    weightKg: 15000,
-    date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7).toISOString().split('T')[0],
-    receiptNumber: 'ROM-2026-0051',
-    counterparty: 'Sítio Santa Rita',
-    driverName: 'Antônio Carlos',
-    vehiclePlate: 'MQE-8B90',
-    warehouseDest: 'Galpão A - Pilha Central',
-    moisture: 11.2,
-    notes: 'Entrada lote especial cereja descascado.',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7).toISOString(),
-  },
-  {
-    id: 'mov-03',
-    lotId: 'lot-02',
-    lotCode: 'LOT-CN-2026-02',
-    variety: 'Conilon Robusta Amazônico',
-    type: 'SAIDA',
-    reason: 'Venda / Embarque',
-    bagsCount: 55,
-    weightKg: 3300,
-    date: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString().split('T')[0],
-    unitPrice: 1680.00,
-    totalPrice: 92400.00,
-    receiptNumber: 'ROM-2026-0068',
-    counterparty: 'Cooperativa COOABRIEL - Unidade Central',
-    driverName: 'Roberto Silva',
-    vehiclePlate: 'OKZ-3312',
-    warehouseSource: 'Galpão A - Pilha Central',
-    notes: 'Venda antecipada com prêmio de qualidade por pontuação especial.',
-    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 2).toISOString(),
-  },
-];
+// Inicialmente sem lotes ou movimentações prévias
+export const INITIAL_LOTS: CoffeeLot[] = [];
+export const INITIAL_MOVEMENTS: StockMovement[] = [];
 
 export const storageService = {
+  // Limpa chaves legadas antigas se existirem
+  cleanLegacyData() {
+    try {
+      localStorage.removeItem('conilon_stock_lots_v1');
+      localStorage.removeItem('conilon_stock_movements_v1');
+      localStorage.removeItem('conilon_stock_warehouses_v1');
+      localStorage.removeItem('conilon_stock_quotes_v1');
+      localStorage.removeItem('conilon_stock_farm_profile_v1');
+    } catch {
+      // Ignora erro
+    }
+  },
+
   getLots(): CoffeeLot[] {
     try {
+      this.cleanLegacyData();
       const data = localStorage.getItem(STORAGE_KEYS.LOTS);
       if (!data) {
         this.saveLots(INITIAL_LOTS);
@@ -292,7 +129,7 @@ export const storageService = {
         weightKg: newLot.weightKg,
         date: new Date().toISOString().split('T')[0],
         receiptNumber: `ROM-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`,
-        counterparty: newLot.producer,
+        counterparty: newLot.producer || 'Fazenda',
         warehouseDest: newLot.warehouseLocation,
         moisture: newLot.moisture,
         notes: `Entrada inicial cadastrada no lote ${newLot.code}`,
@@ -326,6 +163,7 @@ export const storageService = {
 
   getMovements(): StockMovement[] {
     try {
+      this.cleanLegacyData();
       const data = localStorage.getItem(STORAGE_KEYS.MOVEMENTS);
       if (!data) {
         this.saveMovements(INITIAL_MOVEMENTS);
@@ -469,7 +307,7 @@ export const storageService = {
 
   exportFullBackupJSON(): string {
     const backup = {
-      version: '1.0',
+      version: '2.0',
       exportedAt: new Date().toISOString(),
       farmProfile: this.getFarmProfile(),
       warehouses: this.getWarehouses(),
@@ -498,18 +336,11 @@ export const storageService = {
     }
   },
 
-  resetToSampleData() {
-    this.saveLots(INITIAL_LOTS);
-    this.saveMovements(INITIAL_MOVEMENTS);
-    this.saveWarehouses(INITIAL_WAREHOUSES);
-    this.saveQuotes(INITIAL_QUOTES);
-    this.saveFarmProfile(INITIAL_FARM_PROFILE);
-  },
-
   clearAllData() {
     this.saveLots([]);
     this.saveMovements([]);
     this.saveWarehouses(INITIAL_WAREHOUSES);
+    this.saveFarmProfile(INITIAL_FARM_PROFILE);
   },
 
   exportLotsToCSV(): string {

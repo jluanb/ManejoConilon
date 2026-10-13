@@ -481,41 +481,53 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
 
           <div className="mt-3 divide-y divide-stone-100">
-            {activeLots.slice(0, 4).map(lot => (
-              <div
-                key={lot.id}
-                onClick={() => onSelectLot(lot)}
-                className="py-3 flex items-center justify-between hover:bg-amber-50/50 px-2 rounded-xl transition cursor-pointer"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-amber-100/80 text-amber-900 flex items-center justify-center font-bold text-xs border border-amber-200">
-                    {lot.group === 'Conilon' ? 'CN' : 'AB'}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="font-bold text-stone-900 text-xs sm:text-sm font-mono">{lot.code}</span>
-                      <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
-                        lot.status === 'Disponível' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
-                      }`}>
-                        {lot.status}
-                      </span>
-                    </div>
-                    <p className="text-xs text-stone-500 mt-0.5">
-                      {lot.variety} • Umidade: {lot.moisture}% • {lot.warehouseLocation}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="text-right">
-                  <span className="text-sm font-extrabold text-stone-900 font-mono">
-                    {lot.bagsCount} sc
-                  </span>
-                  <span className="block text-[11px] text-stone-500 font-mono">
-                    R$ {(lot.bagsCount * lot.estimatedPricePerBag).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                  </span>
-                </div>
+            {activeLots.length === 0 ? (
+              <div className="py-8 text-center text-stone-400">
+                <p className="text-xs font-medium">Nenhum lote cadastrado ainda no armazém.</p>
+                <button
+                  onClick={onOpenNewLot}
+                  className="mt-2 text-xs font-bold text-emerald-700 hover:underline inline-flex items-center gap-1"
+                >
+                  <Plus className="w-3.5 h-3.5" /> Cadastrar primeiro lote
+                </button>
               </div>
-            ))}
+            ) : (
+              activeLots.slice(0, 4).map(lot => (
+                <div
+                  key={lot.id}
+                  onClick={() => onSelectLot(lot)}
+                  className="py-3 flex items-center justify-between hover:bg-amber-50/50 px-2 rounded-xl transition cursor-pointer"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-xl bg-amber-100/80 text-amber-900 flex items-center justify-center font-bold text-xs border border-amber-200">
+                      {lot.group === 'Conilon' ? 'CN' : 'AB'}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-stone-900 text-xs sm:text-sm font-mono">{lot.code}</span>
+                        <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
+                          lot.status === 'Disponível' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
+                        }`}>
+                          {lot.status}
+                        </span>
+                      </div>
+                      <p className="text-xs text-stone-500 mt-0.5">
+                        {lot.variety} • Umidade: {lot.moisture}% • {lot.warehouseLocation}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="text-right">
+                    <span className="text-sm font-extrabold text-stone-900 font-mono">
+                      {lot.bagsCount} sc
+                    </span>
+                    <span className="block text-[11px] text-stone-500 font-mono">
+                      R$ {(lot.bagsCount * lot.estimatedPricePerBag).toLocaleString('pt-BR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
 
@@ -536,39 +548,51 @@ export const Dashboard: React.FC<DashboardProps> = ({
           </div>
 
           <div className="mt-3 divide-y divide-stone-100">
-            {movements.slice(0, 4).map(mov => (
-              <div key={mov.id} className="py-3 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
-                    mov.type === 'ENTRADA' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-800'
-                  }`}>
-                    {mov.type === 'ENTRADA' ? <ArrowDownLeft className="w-4 h-4" /> : <ArrowUpRight className="w-4 h-4" />}
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-stone-800">{mov.reason}</span>
-                      <span className="text-[11px] text-stone-500 font-mono">({mov.lotCode})</span>
-                    </div>
-                    <p className="text-[11px] text-stone-500">
-                      {mov.counterparty || 'Fazenda'} • {new Date(mov.date).toLocaleDateString('pt-BR')}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="text-right">
-                  <span className={`text-xs sm:text-sm font-bold font-mono ${
-                    mov.type === 'ENTRADA' ? 'text-blue-700' : 'text-stone-800'
-                  }`}>
-                    {mov.type === 'ENTRADA' ? `+${mov.bagsCount} sc` : `-${mov.bagsCount} sc`}
-                  </span>
-                  {mov.receiptNumber && (
-                    <span className="block text-[10px] text-stone-400 font-mono">
-                      {mov.receiptNumber}
-                    </span>
-                  )}
-                </div>
+            {movements.length === 0 ? (
+              <div className="py-8 text-center text-stone-400">
+                <p className="text-xs font-medium">Nenhuma movimentação registrada no histórico.</p>
+                <button
+                  onClick={onOpenNewMovement}
+                  className="mt-2 text-xs font-bold text-amber-800 hover:underline inline-flex items-center gap-1"
+                >
+                  <Plus className="w-3.5 h-3.5" /> Lançar primeira entrada ou saída
+                </button>
               </div>
-            ))}
+            ) : (
+              movements.slice(0, 4).map(mov => (
+                <div key={mov.id} className="py-3 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+                      mov.type === 'ENTRADA' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-800'
+                    }`}>
+                      {mov.type === 'ENTRADA' ? <ArrowDownLeft className="w-4 h-4" /> : <ArrowUpRight className="w-4 h-4" />}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold text-stone-800">{mov.reason}</span>
+                        <span className="text-[11px] text-stone-500 font-mono">({mov.lotCode})</span>
+                      </div>
+                      <p className="text-[11px] text-stone-500">
+                        {mov.counterparty || 'Fazenda'} • {new Date(mov.date).toLocaleDateString('pt-BR')}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="text-right">
+                    <span className={`text-xs sm:text-sm font-bold font-mono ${
+                      mov.type === 'ENTRADA' ? 'text-blue-700' : 'text-stone-800'
+                    }`}>
+                      {mov.type === 'ENTRADA' ? `+${mov.bagsCount} sc` : `-${mov.bagsCount} sc`}
+                    </span>
+                    {mov.receiptNumber && (
+                      <span className="block text-[10px] text-stone-400 font-mono">
+                        {mov.receiptNumber}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </div>

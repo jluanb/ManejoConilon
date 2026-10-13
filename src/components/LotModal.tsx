@@ -55,24 +55,23 @@ export const LotModal: React.FC<LotModalProps> = ({
       setNotes(editingLot.notes || '');
       setStatus(editingLot.status);
     } else {
-      // Default para novo lote
-      const randomNum = Math.floor(10 + Math.random() * 90);
-      setCode(`LOT-CN-2026-${randomNum}`);
+      // Default limpo para novo lote
+      setCode('');
       setGroup('Conilon');
       setVariety('Conilon Vitória');
       setProcessType('Beneficiado / Pilado');
       setHarvestYear('2025/2026');
-      setBagsCount(150);
+      setBagsCount(0);
       const firstWh = warehouses[0];
       setWarehouseId(firstWh ? firstWh.id : '');
-      setWarehouseLocation(firstWh ? `${firstWh.name}` : 'Tulha 01');
+      setWarehouseLocation(firstWh ? `${firstWh.name}` : 'Tulha Principal 01');
       setMoisture(11.8);
       setSieve('Peneira 13 acima');
       setDefects('Tipo 7');
       setCupProfile('Padrão Comercial');
       setEstimatedPricePerBag(1380);
-      setProducer('Sítio Santa Rita');
-      setFarmLocation('São Gabriel da Palha - ES');
+      setProducer('');
+      setFarmLocation('');
       setNotes('');
       setStatus('Disponível');
     }

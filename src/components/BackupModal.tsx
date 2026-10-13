@@ -5,7 +5,6 @@ import {
   Upload, 
   Download, 
   FileSpreadsheet, 
-  RotateCcw, 
   Trash2, 
   CheckCircle2, 
   AlertCircle,
@@ -89,14 +88,6 @@ export const BackupModal: React.FC<BackupModalProps> = ({
     onUpdateFarmProfile(profileForm);
     setProfileSaved(true);
     setTimeout(() => setProfileSaved(false), 3000);
-  };
-
-  const handleResetSampleData = () => {
-    if (confirm('Deseja recarregar os dados de exemplo do café Conilon? Todos os dados atuais serão substituídos pelo modelo inicial.')) {
-      storageService.resetToSampleData();
-      onDataReloaded();
-      setFeedbackMsg({ type: 'success', text: 'Dados de demonstração restaurados com sucesso!' });
-    }
   };
 
   const handleClearAll = () => {
@@ -279,22 +270,14 @@ export const BackupModal: React.FC<BackupModalProps> = ({
             </div>
           </form>
 
-          {/* Zona de Dados & Demonstração */}
-          <div className="pt-3 border-t border-stone-200 flex flex-wrap items-center justify-between gap-3 text-xs">
-            <button
-              onClick={handleResetSampleData}
-              className="text-stone-600 hover:text-stone-900 flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-stone-300 hover:bg-stone-100 transition"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              Restaurar Dados Exemplo (Conilon)
-            </button>
-
+          {/* Zona de Dados */}
+          <div className="pt-3 border-t border-stone-200 flex items-center justify-end gap-3 text-xs">
             <button
               onClick={handleClearAll}
-              className="text-red-600 hover:text-red-700 flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-red-50 transition"
+              className="text-red-600 hover:text-red-700 flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-red-50 border border-red-200 transition"
             >
               <Trash2 className="w-3.5 h-3.5" />
-              Zerar Estoque
+              Zerar Todos os Dados do Estoque
             </button>
           </div>
         </div>

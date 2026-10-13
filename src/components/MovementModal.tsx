@@ -35,10 +35,10 @@ export const MovementModal: React.FC<MovementModalProps> = ({
     setType(defaultType);
     if (defaultType === 'ENTRADA') {
       setReason('Colheita Própria');
-      setCounterparty('Fazenda de Origem');
+      setCounterparty('');
     } else {
       setReason('Venda / Embarque');
-      setCounterparty('COOABRIEL');
+      setCounterparty('');
     }
 
     if (preselectedLot) {
